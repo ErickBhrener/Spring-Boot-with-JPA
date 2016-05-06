@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+	<h3>New Student</h3>
+	<form action="#" th:action="@{/newStudent}" th:object="${student}" method="post">
+		<div>
+			<label for="name">Name:</label>
+			<input type="text" th:field="*{name}" name="name" />
+			<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error message</label>
+		</div>
+		<br />
+		<div>
+			<label for="email">Email:</label> 
+			<input type="text" th:field="*{email}" name="email" />
+			<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error message</label>
+		</div>
+		<br />
+		<div>
+			<label for="birthDate">Date of Birth:</label> 
+			<input type="text" th:field="*{birthDate}" name="birthDate" />
+			<label th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">BirthDay error message</label>
+		</div>
+		<br />
+		Genre:
+		<div th:each="gender : ${T(com.esilva.model.Student.Gender).values()}">
+			<input type="radio" th:value="${gender}" th:field="${student.gender}" />
+			<label th:for="${{gender}}" th:text="${gender.description}"></label>
+		</div>
+		<br />
+		<div>
+			<label for="address">Address:</label> 
+			<input type="text" th:field="*{address}" name="address" />
+			<label th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address error message</label>
+		</div>
+		<br/>
+		<div>
+			<label for="telephoneNumber">Telephone:</label> 
+			<input type="text" th:field="*{telephoneNumber}" name="telephoneNumber" />
+			<label th:if="${#fields.hasErrors('telephoneNumber')}" th:errors="*{telephoneNumber}">Telephone Number error message</label>
+		</div>
+		<br/>
+		<button type="submit">Submit</button>
+	</form>
+</body>
+</html>

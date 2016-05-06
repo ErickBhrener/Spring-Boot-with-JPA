@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+	<h3>New Student</h3>
+	<form action="#" th:action="@{/newCourse}" th:object="${course}" method="post">
+		<div>
+			<label for="name">Title:</label>
+			<input type="text" th:field="*{title}" name="title" />
+			<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error message</label>
+		</div>
+		<br />
+		<div>
+			<label for="email">Description:</label> 
+			<input type="text" th:field="*{description}" name="description" />
+			<label th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error message</label>
+		</div>
+		<br />
+		<div>
+			<label for="credits">Credits:</label> 
+			<input type="text" th:field="*{credits}" name="credits" />
+			<label th:if="${#fields.hasErrors('credits')}" th:errors="*{credits}">Credits error message</label>
+		</div>
+		<br/>
+		<div>
+			<label for="year">Year:</label> 
+			<input type="text" th:field="*{year}" name="year" />
+			<label th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error message</label>
+		</div>
+		<br/>
+		<button type="submit">Submit</button>
+	</form>
+</body>
+</html>
