@@ -3,8 +3,9 @@
 <head>
 	<title>Spring Boot and Thymeleaf example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <object th:include="fragments/head :: head" th:remove="tag"></object>
 </head>
 <body>
-<h3>Hello</h3>
+<div th:replace="fragments/header :: header"></div>
 </body>
 </html>

@@ -3,35 +3,54 @@
 <head>
 	<title>Spring Boot and Thymeleaf example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <object th:include="fragments/head :: head" th:remove="tag"></object>
 </head>
 <body>
-	<h3>New Student</h3>
-	<form action="#" th:action="@{/newCourse}" th:object="${course}" method="post">
-		<div>
-			<label for="name">Title:</label>
-			<input type="text" th:field="*{title}" name="title" />
-			<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error message</label>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="col-lg-6">
+			<div class="well bs-component">
+				<form action="#" th:action="@{/newCourse}" th:object="${course}" method="post" class="form-horizontal">
+				<fieldset>
+					<legend>New Course</legend>
+					<div class="form-group">
+						<label class="col-lg-2 control-label" for="title">Title:</label>
+						<div class="col-lg-10">
+							<input type="text" th:field="*{title}" name="title" />
+							<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error message</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description" class="col-lg-2 control-label">Email:</label>
+						<div class="col-lg-10"> 
+							<input type="text" th:field="*{description}" name="description" />
+							<label th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Email error message</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="year" class="col-lg-2 control-label">Address:</label>
+						<div class="col-lg-10"> 
+							<input type="text" th:field="*{year}" name="year" />
+							<label th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Address error message</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="credits" class="col-lg-2 control-label">Credits:</label>
+						<div class="col-lg-10"> 
+							<input type="text" th:field="*{credits}" name="credits" />
+							<label th:if="${#fields.hasErrors('credits')}" th:errors="*{credits}">Credits error message</label>
+						</div>
+					</div>
+					<div class="form-group">
+				      <div class="col-lg-10 col-lg-offset-2">
+				        <button type="reset" class="btn btn-default">Cancel</button>
+				        <button type="submit" class="btn btn-primary">Submit</button>
+				      </div>
+				    </div>
+				    </fieldset>
+				</form>
+			</div>
 		</div>
-		<br />
-		<div>
-			<label for="email">Description:</label> 
-			<input type="text" th:field="*{description}" name="description" />
-			<label th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error message</label>
-		</div>
-		<br />
-		<div>
-			<label for="credits">Credits:</label> 
-			<input type="text" th:field="*{credits}" name="credits" />
-			<label th:if="${#fields.hasErrors('credits')}" th:errors="*{credits}">Credits error message</label>
-		</div>
-		<br/>
-		<div>
-			<label for="year">Year:</label> 
-			<input type="text" th:field="*{year}" name="year" />
-			<label th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error message</label>
-		</div>
-		<br/>
-		<button type="submit">Submit</button>
-	</form>
+	</div>
 </body>
 </html>
