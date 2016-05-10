@@ -55,5 +55,20 @@ public class Course {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", title=" + title + ", description=" + description + ", credits=" + credits
+				+ ", year=" + year + "]";
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
 	
 }

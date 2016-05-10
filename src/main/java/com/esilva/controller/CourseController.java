@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,10 +26,11 @@ public class CourseController {
 	private EnrollmentRepository enrollmentRepository;
 	@RequestMapping("/")
 	public String index(){
-		return "home";
+		return "redirect:/home";
 	}
 	@RequestMapping("/home")
-	public String home(){
+	public String home(Model model){
+		model.addAttribute("enrollments",enrollmentRepository.findAll());
 		return "home";
 	}
 	@RequestMapping(value="/newStudent", method=RequestMethod.GET)
@@ -40,7 +42,9 @@ public class CourseController {
 		return "create-course";
 	}
 	@RequestMapping(value="/newEnrollment",method=RequestMethod.GET)
-	public String newEnrollmentForm(Enrollment enrollment){
+	public String newEnrollmentForm(Enrollment enrollment, Model model){
+		model.addAttribute("students", studentRepository.findAll());
+		model.addAttribute("courses", courseRepository.findAll());
 		return "create-enrollment";
 	}
 	@RequestMapping(value="/newStudent", method=RequestMethod.POST)
@@ -62,8 +66,9 @@ public class CourseController {
 	@RequestMapping(value="/newEnrollment", method=RequestMethod.POST)
 	public String newEnrollment(@Valid Enrollment enrollment, BindingResult bindResult){
 		if(bindResult.hasErrors()){
-			return "create-enrollment";
+			return "redirect:/create-enrollment";
 		}
+		System.out.println(enrollment.toString());
 		enrollmentRepository.save(enrollment);
 		return "home";
 	}

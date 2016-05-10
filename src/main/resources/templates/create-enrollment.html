@@ -7,5 +7,62 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="col-lg-6">
+			<div class="well bs-component">
+				<form action="#" th:action="@{/newEnrollment}" th:object="${enrollment}" method="post" class="form-horizontal">
+				<fieldset>
+					<legend>Enroll Student</legend>
+					<div class="form-group">
+				      <label for="select" class="col-lg-2 control-label">Selects</label>
+				      <div class="col-lg-10">
+				        <select class="form-control" id="select" th:field="${enrollment.student}">
+				          <option value="" th:text="--SELECT--"></option>
+				          <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.name}"></option>
+				        </select>
+				        <span class="help-inline" th:errors="${enrollment.student}"></span>
+				        <br />
+				        <select class="form-control" th:field="${enrollment.course}">
+				          <option value="" th:text="--SELECT--"></option>
+				          <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.title}"></option>
+				        </select>
+				        <span class="help-inline" th:errors="${enrollment.course}"></span>
+				      </div>
+				    </div>
+					<div class="form-group">
+		      			<label class="col-lg-2 control-label">Term:</label>
+		      			<div class="col-lg-10">
+							<div th:each="term : ${T(com.esilva.model.Enrollment.Term).values()}" class="radio">
+								<label><input type="radio" th:value="${term}" th:field="${enrollment.term}" /></label>
+								<span><label th:for="${{term}}" th:text="${term.description}"></label></span>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="form-group">
+						<label for="yearOfEnrollment" class="col-lg-2 control-label">Year of Enrollment:</label>
+						<div class="col-lg-10"> 
+							<input type="text" th:field="*{yearOfEnrollment}" name="yearOfEnrollment" />
+							<label th:if="${#fields.hasErrors('yearOfEnrollment')}" th:errors="*{yearOfEnrollment}">Year of Enrollment error message</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="finalGrade" class="col-lg-2 control-label">Final Grade:</label>
+						<div class="col-lg-10"> 
+							<input type="text" th:field="*{finalGrade}" name="finalGrade" />
+							<label th:if="${#fields.hasErrors('finalGrade')}" th:errors="*{finalGrade}">Telephone Number error message</label>
+						</div>
+					</div>
+					<div class="form-group">
+				      <div class="col-lg-10 col-lg-offset-2">
+				        <button type="reset" class="btn btn-default">Cancel</button>
+				        <button type="submit" class="btn btn-primary">Submit</button>
+				      </div>
+				    </div>
+				    </fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -117,4 +117,22 @@ public class Student {
 		}
 		
 	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", address=" + address + ", birthDate=" + birthDate
+				+ ", gender=" + gender + ", email=" + email + ", telephoneNumber=" + telephoneNumber + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+	
 }

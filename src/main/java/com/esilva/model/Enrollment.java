@@ -1,6 +1,8 @@
 package com.esilva.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,8 @@ public class Enrollment {
 	private Student student;
 	@ManyToOne
 	private Course course;
-	private Term termOfEnrollment;
+	@Enumerated(EnumType.STRING)
+	private Term term;
 	private Integer yearOfEnrollment;
 	private String finalGrade;
 	
@@ -26,7 +29,7 @@ public class Enrollment {
 
 	public Enrollment(Term termOfEnrollment, Integer yearOfEnrollment, String finalGrade) {
 		super();
-		this.termOfEnrollment = termOfEnrollment;
+		this.term = termOfEnrollment;
 		this.yearOfEnrollment = yearOfEnrollment;
 		this.finalGrade = finalGrade;
 	}
@@ -62,13 +65,13 @@ public class Enrollment {
 	}
 
 
-	public Term getTermOfEnrollment() {
-		return termOfEnrollment;
+	public Term getTerm() {
+		return term;
 	}
 
 
-	public void setTermOfEnrollment(Term termOfEnrollment) {
-		this.termOfEnrollment = termOfEnrollment;
+	public void setTerm(Term term) {
+		this.term = term;
 	}
 
 
@@ -93,6 +96,38 @@ public class Enrollment {
 
 
 	public enum Term{
-		SPRING, FALL, SUMMER, WINTER
+		SPRING("Spring"), FALL("Fall"), SUMMER("Summer"), WINTER("Winter");
+		private String description;
+		private Term(String description){
+			this.description=description;
+		}
+		public String getDescription() {
+			return description;
+		}
+		public void setDescription(String description) {
+			this.description = description;
+		}
 	}
+
+
+	@Override
+	public String toString() {
+		return "Enrollment [id=" + id + ", student=" + student + ", course=" + course + ", term=" + term
+				+ ", yearOfEnrollment=" + yearOfEnrollment + ", finalGrade=" + finalGrade + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+	
 }

@@ -3,8 +3,7 @@
 <head>
 	<title>Spring Boot and Thymeleaf example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-	href="../../css/bootstrap.min.css" />
+    <object th:include="fragments/head :: head" th:remove="tag"></object>
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
